@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <title>Linkedin connect github badge</title>
+<style>
+html, body {
+  background-color: rgb(53, 51, 51);
+  width: '100%';
+  height: '100%';
+  text-align: center;
+  display: flex;
+  justify-content: center;
+
+}
+h1 {
+  color: 'white';
+}
+#root {
+  position: absolute;
+  top: 50%;
+  margin-top: -25px; 
+}
+</style>
+  </head>
+
+  <body>
+    <div id="root">
+
+    </div>
+  </body>
+  <script>
+    function getUrlVars() {
+      var vars = {};
+      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+      });
+      return vars;
+    }
+
+    let tmp_client_id_token = getUrlVars()["state"];
+    var client_id_token;
+
+    if (!tmp_client_id_token) {
+      client_id_token = prompt("Type in your client_id");
+    } else {
+      client_id_token = tmp_client_id_token;
+    }
+
+    let token_code = getUrlVars()["code"];
+
+    if (token_code) {
+      var client_secret_token = prompt("Type in your client_secret");
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+      myHeaders.append("mode", "no-cors");
+
+      var urlencoded = new URLSearchParams();
+      urlencoded.append("grant_type", "authorization_code");
+      urlencoded.append("code", token_code);
+      urlencoded.append("client_id", client_id_token);
+      urlencoded.append("client_secret", client_secret_token);
+      urlencoded.append("redirect_uri", document.location.origin);
+
+      var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: urlencoded,
+          redirect: 'follow'
+      };
+
+      fetch("https://proxy.cors.sh/https://www.linkedin.com/oauth/v2/accessToken", requestOptions)
+      .then(response => response.json()).then(result => {
+        console.log(result);
+        var access_token_code = `
+          <h1>${result.access_token}</h1>
+        `;
+        document.getElementById('root').innerHTML = access_token_code;
+      }).catch(error => console.log('error', error));
+    } else {
+      var source_linkedin_btn = `
+        <a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${client_id_token}&redirect_uri=${document.location.origin}&state=${client_id_token}&scope=r_liteprofile%20r_emailaddress%20w_member_social">
+          <img src="signin_btn.png" />
+        </a>
+      `;
+      document.getElementById('root').innerHTML = source_linkedin_btn;
+    }
+  </script>
+</html>

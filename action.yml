@@ -14,5 +14,5 @@ runs:
   using: node16
   main: dist/index.js
 branding:
-  icon: 'cloud-lightning'
-  color: 'red'
+  icon: 'align-center'
+  color: 'blue'
