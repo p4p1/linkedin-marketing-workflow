@@ -1,0 +1,29 @@
+{
+  "name": "linkedin-marketing-workflow",
+  "version": "1.0.0",
+  "description": "A simple github action to post on linkedin everytime a new blog post is uploaded",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\"",
+    "build": "ncc build index.js -o dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/p4p1/linkedin-marketing-workflow.git"
+  },
+  "author": "p4p1",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/p4p1/linkedin-marketing-workflow/issues"
+  },
+  "homepage": "https://github.com/p4p1/linkedin-marketing-workflow/issues#readme",
+  "devDependencies": {
+    "eslint": "^8.0.1"
+  },
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "@vercel/ncc": "^0.31.1",
+    "node-fetch": "^2.6.1"
+  }
+}
