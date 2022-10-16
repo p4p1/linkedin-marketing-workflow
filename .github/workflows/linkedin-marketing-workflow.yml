@@ -5,13 +5,13 @@ on:
     # Make it run every 24 hour
     - cron: '0 0 * * *'
     workflow_dispatch:
-  jobs:
-    linkedin-marketing-workflow:
-      name: Does a linked in post using your rss feed
-      runs-on: ubuntu-latest
-      steps:
-        - uses: ./
-        with:
-          # Replace with your rss feed link
-          rss_feed: "https://leosmith.xyz/rss/blog.xml"
-          LINKEDIN_TOKEN: ${{secrets.LINKEDINTOKEN}}
+jobs:
+  linkedin-marketing-workflow:
+    name: Does a linked in post using your rss feed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./
+      with:
+        # Replace with your rss feed link
+        rss_feed: "https://leosmith.xyz/rss/blog.xml"
+        LINKEDIN_TOKEN: ${{secrets.LINKEDINTOKEN}}
