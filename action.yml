@@ -4,10 +4,10 @@ description: 'Send a linkedin post on rss feed update'
 
 inputs:
   rss_feed:
-    description: 'rss feed linke'
+    description: 'rss feed link'
     required: true
-  LINKEDIN_TOKEN:
-    description: 'Linkedin token'
+  LINKEDIN_SECRET:
+    description: 'LinkedIn token for API requests'
     required: true
 
 runs:
