@@ -15,4 +15,4 @@ jobs:
         with:
           # Replace with your rss feed link
           rss_feed: "https://leosmith.xyz/rss/blog.xml"
-          LINKEDIN_TOKEN: ${{secrets.LINKEDIN_TOKEN}}
+          LINKEDIN_SECRET: ${{secrets.LINKEDIN_SECRET}}
