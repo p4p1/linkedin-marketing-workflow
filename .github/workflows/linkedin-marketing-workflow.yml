@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: ./
-      with:
-        # Replace with your rss feed link
-        rss_feed: "https://leosmith.xyz/rss/blog.xml"
-        LINKEDIN_TOKEN: ${{secrets.LINKEDIN_TOKEN}}
+        with:
+          # Replace with your rss feed link
+          rss_feed: "https://leosmith.xyz/rss/blog.xml"
+          LINKEDIN_TOKEN: ${{secrets.LINKEDIN_TOKEN}}
