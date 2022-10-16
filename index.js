@@ -6,9 +6,10 @@ const LINKEDIN_SECRET = core.getInput("LINKEDIN_SECRET");
 core.setSecret(LINKEDIN_SECRET);
 
 function sendPostLinkedIn(title, url, desc) {
-  var myHeaders = new Headers();
-  myHeaders.append("Authorization", `Bearer ${process.env.LINKEDIN_SECRET}`);
-  myHeaders.append("Content-Type", "application/json");
+  var myHeaders = {
+    "Authorization": `Bearer ${process.env.LINKEDIN_SECRET}`,
+    "Content-Type": "application/json"
+  }
   var raw = JSON.stringify({
     "author": "urn:li:person:s2fNfmiGu2",
     "lifecycleState": "PUBLISHED",
