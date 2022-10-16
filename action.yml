@@ -1,29 +1,13 @@
-name: 'TryHackMe Badge Workflow'
+name: 'LinkedIn Marketing Workflow'
 author: 'Leo Smith - p4p1'
-description: 'Gets your tryhackme badge and updates it on your README'
+description: 'Send a linkedin post on rss feed update'
 
 inputs:
-  image_path:
-    description: 'Path of the image file you want to update'
-    default: './assets/thm_propic.png'
-    required: false
-  username:
-    description: 'Try Hack Me username'
+  rss_feed:
+    description: 'rss feed linke'
     required: true
-  committer_username:
-    description: 'username of committing bot'
-    default: 'thm-p4p1-bot'
-    required: false
-  committer_email:
-    description: 'email of committing bot'
-    default: 'p4p1@thm.bot'
-    required: false
-  commit_message:
-    description: 'message of committing bot'
-    default: 'Updated THM profile badge'
-    required: false
-  GITHUB_TOKEN:
-    description: 'GitHub token'
+  LINKEDIN_TOKEN:
+    description: 'Linkedin token'
     required: true
 
 runs:
