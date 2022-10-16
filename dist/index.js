@@ -9688,6 +9688,7 @@ const fetch = __nccwpck_require__(467);
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 
+const LINKEDIN_SECRET = core.getInput("LINKEDIN_SECRET");
 core.setSecret(LINKEDIN_SECRET);
 
 console.log("helloWorld");
