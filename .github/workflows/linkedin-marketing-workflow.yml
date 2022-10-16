@@ -10,6 +10,7 @@ jobs:
     name: Does a linked in post using your rss feed
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: ./
         with:
           # Replace with your rss feed link
