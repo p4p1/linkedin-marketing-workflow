@@ -3,15 +3,16 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 const LINKEDIN_SECRET = core.getInput("LINKEDIN_SECRET");
+
 core.setSecret(LINKEDIN_SECRET);
 
-function sendPostLinkedIn(title, url, desc) {
+function sendPostLinkedIn(title, url, desc, user_id) {
   var myHeaders = {
     "Authorization": `Bearer ${process.env.LINKEDIN_SECRET}`,
     "Content-Type": "application/json"
   }
   var raw = JSON.stringify({
-    "author": "urn:li:person:s2fNfmiGu2",
+    "author": `urn:li:person:${user_id}`,
     "lifecycleState": "PUBLISHED",
     "specificContent": {
       "com.linkedin.ugc.ShareContent": {
@@ -51,4 +52,19 @@ function sendPostLinkedIn(title, url, desc) {
   .catch(error => console.log('error', error));
 }
 
-sendPostLinkedIn("example", "https://leosmith.xyz", "A quick example to test some stuff out")
+console.log(process.env.LINKEDIN_SECRET);
+var myHeaders = {"Authorization": `Bearer ${process.env.LINKEDIN_SECRET}`}
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://api.linkedin.com/v2/me", requestOptions)
+  .then(response => response.json())
+  .then(result => {
+    console.log(result);
+    sendPostLinkedIn("example", "https://leosmith.xyz", "A quick example to test some stuff out", result.id)
+  })
+  .catch(error => console.log('error', error));
+
