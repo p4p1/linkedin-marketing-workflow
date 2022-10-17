@@ -3,8 +3,9 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 const LINKEDIN_SECRET = core.getInput("LINKEDIN_SECRET");
+const RSS_FEED = core.getInput("rss_feed");
 
-core.setSecret(LINKEDIN_SECRET);
+//core.setSecret(LINKEDIN_SECRET);
 
 function sendPostLinkedIn(title, url, desc, user_id) {
   var myHeaders = {
@@ -53,6 +54,8 @@ function sendPostLinkedIn(title, url, desc, user_id) {
 }
 
 console.log(process.env.LINKEDIN_SECRET);
+console.log(LINKEDIN_SECRET);
+console.log(RSS_FEED);
 var myHeaders = {"Authorization": `Bearer ${process.env.LINKEDIN_SECRET}`}
 var requestOptions = {
   method: 'GET',
