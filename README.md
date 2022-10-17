@@ -18,8 +18,8 @@ name: Linkedin Marketing Workflow
 
 on:
   schedule:
-    # Make it run every 24 hour
-    - cron: '0 0 * * *'
+    # Make it run every day at 12:00
+    - cron: '0 12 * * *'
   workflow_dispatch:
 jobs:
   linkedin-marketing-workflow:
