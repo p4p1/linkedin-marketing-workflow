@@ -162,9 +162,6 @@ let parser = new Parser();
 
   // check the file to see if the post has already been sent
   fs.readFile(FILEPATH, 'utf8', function(err, data){
-    console.log(data);
-    console.log(feed.items[0].title);
-    console.log(data != feed.items[0].title);
     if (data != feed.items[0].title) {
       // write to file if not posted
       fs.writeFile(FILEPATH, feed.items[0].title, function (err) {
@@ -174,7 +171,7 @@ let parser = new Parser();
       // push the file to the repo to remember what was uploaded to linkedin
       update_last_upload();
       // send the post
-      //sendpost(feed.items[0].title, feed.items[0].content, feed.items[0].link);
+      sendpost(feed.items[0].title, feed.items[0].content, feed.items[0].link);
     }
   });
 })();
