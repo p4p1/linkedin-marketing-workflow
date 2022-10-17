@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+      - uses: p4p1/linkedin-marketing-workflow@main
         with:
           # Replace with your rss feed link
           rss_feed: "https://leosmith.xyz/rss/blog.xml"
