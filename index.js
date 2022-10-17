@@ -113,6 +113,23 @@ function sendpost(title, content, link) {
     .catch(error => console.log('error', error));
 }
 
+async function update_last_upload() {
+  await exec('git', [
+    'config',
+      '--global',
+      'user.email',
+      commiterEmail,
+    ]);
+  await exec('git', ['config', '--global', 'user.name', commiterUsername]);
+  if (GITHUB_TOKEN) {
+    await exec('git', ['remote', 'set-url', 'origin',
+      `https://${GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`]);
+  }
+  await exec('git', ['add', FILEPATH]);
+  await exec('git', ['commit', '-m', commitMessage]);
+  await exec('git', ['push']);
+}
+
 let parser = new Parser();
 (async () => {
   let feed = await parser.parseURL(RSS_FEED);
@@ -129,21 +146,8 @@ let parser = new Parser();
         if (err) return console.log(err);
         console.log('Hello World > helloworld.txt');
       });
-      await exec('git', [
-        'config',
-          '--global',
-          'user.email',
-          commiterEmail,
-        ]);
-      await exec('git', ['config', '--global', 'user.name', commiterUsername]);
-      if (GITHUB_TOKEN) {
-        await exec('git', ['remote', 'set-url', 'origin',
-          `https://${GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`]);
-      }
-      await exec('git', ['add', FILEPATH]);
-      await exec('git', ['commit', '-m', commitMessage]);
-      await exec('git', ['push']);
 
+      update_last_upload();
       sendpost(feed.items[0].title, feed.items[0].content, feed.items[0].link);
     }
   });
