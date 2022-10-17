@@ -1,3 +1,4 @@
+let Parser = require('rss-parser');
 const fetch = require('node-fetch');
 const core = require('@actions/core');
 const github = require('@actions/github');
@@ -53,18 +54,29 @@ function sendPostLinkedIn(title, url, desc, user_id) {
   .catch(error => console.log('error', error));
 }
 
+let parser = new Parser();
+(async () => {
+    let feed = await parser.parseURL(RSS_FEED);
+
+    console.log(feed.title);
+
+    feed.items.forEach((item) => {
+          console.log(item.title);
+        });
+})();
+
+// Code to get user profile
 var myHeaders = {"Authorization": `Bearer ${LINKEDIN_SECRET}`}
 var requestOptions = {
   method: 'GET',
   headers: myHeaders,
   redirect: 'follow'
 };
-
 fetch("https://api.linkedin.com/v2/me", requestOptions)
   .then(response => response.json())
   .then(result => {
     console.log(result);
-    sendPostLinkedIn("example", "https://leosmith.xyz", "A quick example to test some stuff out", result.id)
+    //sendPostLinkedIn("example", "https://leosmith.xyz", "A quick example to test some stuff out", result.id)
   })
   .catch(error => console.log('error', error));
 
