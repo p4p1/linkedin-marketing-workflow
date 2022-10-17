@@ -18,11 +18,11 @@ inputs:
     required: false
   commiter_username:
     description: 'username of committing bot'
-    default: 'thm-p4p1-bot'
+    default: 'lkn-p4p1-bot'
     required: false
   commiter_email:
     description: 'email of committing bot'
-    default: 'p4p1@thm.bot'
+    default: 'p4p1@lkn.bot'
     required: false
   commit_message:
     description: 'message of committing bot'
