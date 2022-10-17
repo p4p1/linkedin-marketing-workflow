@@ -17158,6 +17158,19 @@ module.exports = require("zlib");
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
+/* index.js
+ * Created on: Mon 17 Oct 2022 02:09:06 AM BST
+ *
+ *  ____   __  ____  __
+ * (  _ \ /. |(  _ \/  )
+ *  )___/(_  _))___/ )(
+ * (__)    (_)(__)  (__)
+ * https://leosmith.xyz/
+ *
+ * Description:
+ *  A javascript file to send a linkedin post when a new blog post is created
+ *
+ */
 let Parser = __nccwpck_require__(6946);
 const fetch = __nccwpck_require__(467);
 const core = __nccwpck_require__(2186);
@@ -17210,6 +17223,13 @@ const exec = (cmd, args = [], options = {}) => new Promise((resolve, reject) => 
   app.on('error', () => reject({code: 1, outputData}));
 });
 
+/*
+ * Pure request to send post
+ * @param title {string} title of post
+ * @param url {string} url of the blog post
+ * @param desc {string} description of the blog post
+ * @param user_id {string} user id to be sent to API
+ */
 function sendPostLinkedIn(title, url, desc, user_id) {
   var myHeaders = {
     "Authorization": `Bearer ${LINKEDIN_SECRET}`,
@@ -17256,6 +17276,12 @@ function sendPostLinkedIn(title, url, desc, user_id) {
   .catch(error => console.log('error', error));
 }
 
+/*
+ * A wrapper around sendPostLinkedIn used to get UserId before sending post create request
+ * @param title {string} the title of the blog pos
+ * @param content {string} the description of the blog post
+ * @param link {string} the link of the blog post
+ */
 function sendpost(title, content, link) {
   // Code to get user profile
   var myHeaders = {"Authorization": `Bearer ${LINKEDIN_SECRET}`}
@@ -17267,7 +17293,6 @@ function sendpost(title, content, link) {
   fetch("https://api.linkedin.com/v2/me", requestOptions)
     .then(response => response.json())
     .then(result => {
-      console.log(result);
       sendPostLinkedIn(title, link, content, result.id)
     })
     .catch(error => console.log('error', error));
@@ -17292,29 +17317,24 @@ async function update_last_upload() {
 
 let parser = new Parser();
 (async () => {
+  // Parse the rss feed
   let feed = await parser.parseURL(RSS_FEED);
 
-  console.log(feed.items[0]);
-
-  console.log(feed.items[0].title);
-  console.log(feed.items[0].content);
-  console.log(feed.items[0].link);
+  // check the file to see if the post has already been sent
   fs.readFile(FILEPATH, 'utf8', function(err, data){
-    console.log(data);
     if (data != feed.items[0].title) {
+      // write to file if not posted
       fs.writeFile(FILEPATH, feed.items[0].title, function (err) {
         if (err) return console.log(err);
-        console.log('Hello World > helloworld.txt');
       });
 
+      // push the file to the repo to remember what was uploaded to linkedin
       update_last_upload();
+      // send the post
       sendpost(feed.items[0].title, feed.items[0].content, feed.items[0].link);
     }
   });
 })();
-
-
-
 
 })();
 
