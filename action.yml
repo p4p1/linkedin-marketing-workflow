@@ -9,6 +9,25 @@ inputs:
   LINKEDIN_SECRET:
     description: 'LinkedIn token for API requests'
     required: true
+  GITHUB_TOKEN:
+    description: 'GitHub token'
+    required: true
+  FILE_PATH:
+    description: 'Path of the text file to store last posted'
+    default: './assets/lastposted.txt'
+    required: false
+  commiter_username:
+    description: 'username of committing bot'
+    default: 'thm-p4p1-bot'
+    required: false
+  commiter_email:
+    description: 'email of committing bot'
+    default: 'p4p1@thm.bot'
+    required: false
+  commit_message:
+    description: 'message of committing bot'
+    default: 'LinkedIn Marketing commit bot'
+    required: false
 
 runs:
   using: node16
