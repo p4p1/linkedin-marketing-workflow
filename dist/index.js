@@ -9695,7 +9695,7 @@ const RSS_FEED = core.getInput("rss_feed");
 
 function sendPostLinkedIn(title, url, desc, user_id) {
   var myHeaders = {
-    "Authorization": `Bearer ${process.env.LINKEDIN_SECRET}`,
+    "Authorization": `Bearer ${LINKEDIN_SECRET}`,
     "Content-Type": "application/json"
   }
   var raw = JSON.stringify({
@@ -9739,10 +9739,7 @@ function sendPostLinkedIn(title, url, desc, user_id) {
   .catch(error => console.log('error', error));
 }
 
-console.log(process.env.LINKEDIN_SECRET);
-console.log(LINKEDIN_SECRET);
-console.log(RSS_FEED);
-var myHeaders = {"Authorization": `Bearer ${process.env.LINKEDIN_SECRET}`}
+var myHeaders = {"Authorization": `Bearer ${LINKEDIN_SECRET}`}
 var requestOptions = {
   method: 'GET',
   headers: myHeaders,
