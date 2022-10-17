@@ -56,13 +56,16 @@ function sendPostLinkedIn(title, url, desc, user_id) {
 
 let parser = new Parser();
 (async () => {
-    let feed = await parser.parseURL(RSS_FEED);
+  let feed = await parser.parseURL(RSS_FEED);
 
-    console.log(feed.title);
+  console.log(feed.items[0]);
 
-    feed.items.forEach((item) => {
-          console.log(item.title);
-        });
+  console.log(feed.items[0].title);
+  console.log(feed.items[0].description);
+  console.log(feed.items[0].url);
+  feed.items.forEach((item) => {
+    console.log(item.title);
+  });
 })();
 
 // Code to get user profile
