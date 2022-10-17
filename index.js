@@ -162,7 +162,7 @@ let parser = new Parser();
 
   // check the file to see if the post has already been sent
   fs.readFile(FILEPATH, 'utf8', function(err, data){
-    if (data != feed.items[0].title) {
+    if (data != feed.items[0].title && LINKEDIN_SECRET != undefined) {
       // write to file if not posted
       fs.writeFile(FILEPATH, feed.items[0].title, function (err) {
         if (err) return console.log(err);
