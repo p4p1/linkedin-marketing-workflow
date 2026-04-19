@@ -1,6 +1,7 @@
 linkedin-marketing-workflow
 ===========================
 
+_I used to use this for a bit but currently stopped I'm to lazy to maintain this so it is now EOL sorry :( love you all <3_
 *A simple github action to post on LinkedIn every time your update your RSS Feed !*
 
 ![post_demo](https://raw.githubusercontent.com/p4p1/linkedin-marketing-workflow/main/assets/screenshot.png)
